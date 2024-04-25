@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
 # Script that installs Nginx server
-apt-get -y update
-apt-get -y install nginx
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
-service nginx start
+
+apt-get update
+apt-get install -y nginx
+
+# Configure Nginx to listen on port 80
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm;
+    server_name _;
+    location / {
+        echo 'Hello World!';
+    }
+}" > /etc/nginx/sites-available/default
+
+# Test Nginx configuration
+nginx -t
+
+# Restart Nginx without using systemctl
+kill -s HUP $(pgrep -f "nginx: master process")
+
+echo "Nginx installed and configured successfully."
