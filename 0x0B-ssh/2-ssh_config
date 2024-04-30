@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# update ssh config
+Host school
+    HostName 54.236.26.70
+    User ubuntu
+    Port 22
+    IdentityFile ~/.ssh/school
