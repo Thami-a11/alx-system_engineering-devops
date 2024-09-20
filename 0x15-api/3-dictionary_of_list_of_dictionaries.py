@@ -26,3 +26,4 @@ if __name__ == "__main__":
         report[id_em] = list_dict_report
     with open("todo_all_employees.json", "w") as fjson:
         fjson.write(json.dumps(report))
+        
